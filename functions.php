@@ -167,3 +167,4 @@ add_action( 'init', 'cptui_register_my_cpts_autos' );
 
 //Acf fields
 require_once( get_template_directory() . '/acf/indexfields.php' );
+require_once( get_template_directory() . '/acf/autosfields.php' );
