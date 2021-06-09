@@ -51,11 +51,14 @@ acf_add_local_field_group(array(
 function acf_load_color_field_choices( $field ) {
     // reset choices
     $field['choices'] = array();
-            
-    $field['choices'][ 'Ferrari' ] = 'Ferrari';
-    $field['choices'][ 'Ford' ] = 'Ford';
-    $field['choices'][ 'Renault' ] = 'Renault';
-    
+	global $wpdb;
+	$query='SELECT count(marca),marca FROM '.$wpdb->prefix.'modelos group by marca order by Marca asc ';
+	$marcas=$wpdb->get_results($query);
+	
+    foreach($marcas as $marca){
+		$field['choices'][$marca->marca] = $marca->marca;
+	}        
+
     // return the field
     return $field;
     
