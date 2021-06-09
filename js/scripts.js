@@ -3,11 +3,14 @@
 * Copyright 2013-2021 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-bare/blob/master/LICENSE)
 */
-
-
 $(function() {
-    console.log( "ready!" );
-	var myCarousel = $('#myCarousel');
-	console.log(myCarousel)
-	var carousel = new bootstrap.Carousel(myCarousel)
+	$('.indexslide').owlCarousel({
+		items:1,
+		loop:true,
+		margin:0,
+		nav:true,
+	});
+	$('#btn-login').on('click',function(){
+		$('#myModal').modal('show');
+	});
 });

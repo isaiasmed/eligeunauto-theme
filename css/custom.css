@@ -28,11 +28,11 @@
 	border: none;
 	border-bottom: 0.3px solid #ec0000;
 }
-.slider-inicio{
+.indexslide{
 	height: 892px;
 	overflow: hidden;
 }
-.carousel-item {
+.item {
 	height: 892px;
 	background-size: cover !important;
 	background-position: center center !important;
@@ -53,8 +53,24 @@
 	font-size: 3rem;
 	line-height: 3.2rem;
 }
+.slider-caption img {
+	display: initial !important;
+	width: inherit !important;
+}
 .navbar-brand {
 	max-width:40%;
+}
+.owl-prev,.owl-next {
+	position: absolute;
+	top: 40%;
+	color: rgba(255, 255, 255, 0.3) !important;
+	font-size: 10rem !important;
+}
+.owl-prev{
+	left: 0.33%;
+}
+.owl-next{
+	right: 0.33%;
 }
 #menu-principal .nav-link i {
 	font-size: 1.8rem;

@@ -3,10 +3,25 @@
 add_theme_support('title-tag');
 add_theme_support('post-thumbnails');
 add_action('wp_enqueue_scripts', 'wpdocs_theme_name_scripts');
-
 function wpdocs_theme_name_scripts() {
+	wp_deregister_script('jquery');
+	wp_register_script('jquery','https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js', '', '3.6.0', true);
+	wp_enqueue_script('jquery');
+	
 	wp_enqueue_style('style', get_template_directory_uri() . '/css/styles.css', '', '1.1');
-	wp_enqueue_style('custom', get_template_directory_uri() . '/css/custom.css', '', '1.1');
+	wp_enqueue_style('custom', get_template_directory_uri() . '/css/custom.css', '', '1.1');	
+	wp_enqueue_style('owl-css', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', '', '2.3.4');	
+	//wp_enqueue_style('owl-theme-css', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css', '', '2.3.4');	
+	
+	//wp_enqueue_scripts('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js', '', '3.6.0', true);
+	
+	wp_enqueue_script('fontawesome', 'https://kit.fontawesome.com/a9a129e468.js', '', '5.0.0', true);
+	wp_enqueue_script('bootsrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js', '', '5.0.1', true);
+	if(is_home()){
+		wp_enqueue_script('owl', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', '', '2.3.4', true);
+	}
+	wp_register_script('theme-script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.' . date('YmdHis'), true);
+	wp_enqueue_script('theme-script');
 }
 
 //Activar VC
@@ -65,6 +80,10 @@ if( ! class_exists('acf_options_page_plugin') ) {
 // Repeater Add-On
 if( ! class_exists('acf_repeater_plugin') ) {
 	include_once( MY_ACF_PATH . '/inc/acf-repeater/acf-repeater.php');
+}
+// Crop Image Add-On
+if( ! class_exists('npx_acf_plugin_image_aspect_ratio_crop') ) {
+	include_once( MY_ACF_PATH . '/inc/acf-crop-image/acf-image-crop.php');
 }
 
 if( function_exists('acf_set_options_page_title') ) {
@@ -168,3 +187,4 @@ add_action( 'init', 'cptui_register_my_cpts_autos' );
 //Acf fields
 require_once( get_template_directory() . '/acf/indexfields.php' );
 require_once( get_template_directory() . '/acf/autosfields.php' );
+require_once( get_template_directory() . '/acf/loginfields.php' );
