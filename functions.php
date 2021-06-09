@@ -20,8 +20,8 @@ function eligeunauto_register_required_plugins() {
            'required'  => false,
         ),
 		array(
-           'name'      => 'Visual Composer Website Builder',
-           'slug'      => 'visualcomposer',
+           'name'      => 'Social Login',
+           'slug'      => 'miniorange-login-openid',
            'required'  => false,
        ),
    );
