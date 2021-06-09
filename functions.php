@@ -86,12 +86,83 @@ function themename_custom_logo_setup() {
         'flex-width'           => false,
         'header-text'          => array( 'site-title', 'site-description' ),
         'unlink-homepage-logo' => false, 
-    );
- 
+    ); 
     add_theme_support( 'custom-logo', $defaults );
 }
  
 add_action( 'after_setup_theme', 'themename_custom_logo_setup' );
+
+
+function cptui_register_my_cpts_autos() {
+
+	/**
+	 * Post Type: Autos.
+	 */
+
+	$labels = [
+		"name" => __( "Autos", "custom-post-type-ui" ),
+		"singular_name" => __( "Auto", "custom-post-type-ui" ),
+		"menu_name" => __( "Autos", "custom-post-type-ui" ),
+		"all_items" => __( "Todos los Autos", "custom-post-type-ui" ),
+		"add_new" => __( "Añadir nuevo", "custom-post-type-ui" ),
+		"add_new_item" => __( "Añadir nuevo Auto", "custom-post-type-ui" ),
+		"edit_item" => __( "Editar Auto", "custom-post-type-ui" ),
+		"new_item" => __( "Nuevo Auto", "custom-post-type-ui" ),
+		"view_item" => __( "Ver Auto", "custom-post-type-ui" ),
+		"view_items" => __( "Ver Autos", "custom-post-type-ui" ),
+		"search_items" => __( "Buscar Autos", "custom-post-type-ui" ),
+		"not_found" => __( "No se ha encontrado Autos", "custom-post-type-ui" ),
+		"not_found_in_trash" => __( "No se han encontrado Autos en la papelera", "custom-post-type-ui" ),
+		"parent" => __( "Auto superior:", "custom-post-type-ui" ),
+		"featured_image" => __( "Imagen destacada para Auto", "custom-post-type-ui" ),
+		"set_featured_image" => __( "Establece una imagen destacada para Auto", "custom-post-type-ui" ),
+		"remove_featured_image" => __( "Eliminar la imagen destacada de Auto", "custom-post-type-ui" ),
+		"use_featured_image" => __( "Usar como imagen destacada de Auto", "custom-post-type-ui" ),
+		"archives" => __( "Archivos de Auto", "custom-post-type-ui" ),
+		"insert_into_item" => __( "Insertar en Auto", "custom-post-type-ui" ),
+		"uploaded_to_this_item" => __( "Subir a Auto", "custom-post-type-ui" ),
+		"filter_items_list" => __( "Filtrar la lista de Autos", "custom-post-type-ui" ),
+		"items_list_navigation" => __( "Navegación de la lista de Autos", "custom-post-type-ui" ),
+		"items_list" => __( "Lista de Autos", "custom-post-type-ui" ),
+		"attributes" => __( "Atributos de Autos", "custom-post-type-ui" ),
+		"name_admin_bar" => __( "Auto", "custom-post-type-ui" ),
+		"item_published" => __( "Auto publicado", "custom-post-type-ui" ),
+		"item_published_privately" => __( "Auto publicado como privado.", "custom-post-type-ui" ),
+		"item_reverted_to_draft" => __( "Auto devuelto a borrador.", "custom-post-type-ui" ),
+		"item_scheduled" => __( "Auto programado", "custom-post-type-ui" ),
+		"item_updated" => __( "Auto actualizado.", "custom-post-type-ui" ),
+		"parent_item_colon" => __( "Auto superior:", "custom-post-type-ui" ),
+	];
+
+	$args = [
+		"label" => __( "Autos", "custom-post-type-ui" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => [ "slug" => "autos", "with_front" => true ],
+		"query_var" => true,
+		"menu_position" => 5,
+		"menu_icon" => "dashicons-car",
+		"supports" => [ "title" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "autos", $args );
+}
+add_action( 'init', 'cptui_register_my_cpts_autos' );
 
 
 //Acf fields
