@@ -52,4 +52,7 @@
 				<a class="nav-link text-dark" aria-current="page" href="#"><i class="fas fa-search"></i></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             </div>
-        </nav>
+        </nav><?php
+		if(!is_home()){?>
+			<div style="background:url('<?php echo get_template_directory_uri();?>/assets/img/puerta.png');" class="w-100 page-banner"></div><?php			
+		};

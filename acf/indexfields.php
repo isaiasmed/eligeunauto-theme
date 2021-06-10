@@ -1,5 +1,5 @@
 <?php
-/*if( function_exists('acf_add_local_field_group') ):
+if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array(
 	'key' => 'group_60bfb3d844454',
@@ -22,7 +22,7 @@ acf_add_local_field_group(array(
 			'min' => 1,
 			'max' => 5,
 			'layout' => 'table',
-			'button_label' => 'Agregar Slide',
+			'button_label' => 'Agregar Slider',
 			'sub_fields' => array(
 				array(
 					'key' => 'field_60bfb440111f7',
@@ -48,6 +48,25 @@ acf_add_local_field_group(array(
 					'max_size' => '',
 					'mime_types' => '',
 				),
+				array(
+					'key' => 'field_60c11fd00b008',
+					'label' => 'Caja de Texto',
+					'name' => 'cajatexto',
+					'type' => 'wysiwyg',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'tabs' => 'all',
+					'toolbar' => 'full',
+					'media_upload' => 1,
+					'delay' => 0,
+				),
 			),
 		),
 	),
@@ -70,4 +89,4 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
-endif;*/
+endif;

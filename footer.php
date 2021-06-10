@@ -124,16 +124,16 @@
 					else:?>
 						<h5 class="mb-5">USUARIO: <?php $current_user = wp_get_current_user(); echo $current_user->user_email ?></h5>
 						<div class="input-group mt-0">
-							<a class="btn-primary w-100 d-block btn p-2" href="<?php echo wp_logout_url( site_url() );?>"><i class="fas fa-car-side"></i> MIS AUTOS EN VENTA</a>
+							<a class="btn-primary w-100 d-block btn p-2" href="<?php echo site_url('cuenta-usuario');?>#venta"><i class="fas fa-car-side"></i> MIS AUTOS EN VENTA</a>
 						</div>
 						<div class="input-group mt-2">
-							<a class="btn-primary w-100 d-block btn p-2" href="<?php echo wp_logout_url( site_url() );?>"><i class="fas fa-car"></i> MIS AUTOS COMPRADOS</a>
+							<a class="btn-primary w-100 d-block btn p-2" href="<?php echo site_url('cuenta-usuario');?>#venta"><i class="fas fa-car"></i> MIS AUTOS COMPRADOS</a>
 						</div>
 						<div class="input-group mt-2">
-							<a class="btn-primary w-100 d-block btn p-2" href="<?php echo wp_logout_url( site_url() );?>"><i class="fas fa-clipboard-check"></i> LISTA DESEOS</a>
+							<a class="btn-primary w-100 d-block btn p-2" href="<?php echo site_url('cuenta-usuario');?>#venta"><i class="fas fa-clipboard-check"></i> LISTA DESEOS</a>
 						</div>
 						<div class="input-group mt-4">
-							<a class="btn-dark w-100 d-block btn p-2" href="<?php echo wp_logout_url( site_url() );?>"><i class="far fa-id-badge"></i> MI PERFIL</a>
+							<a class="btn-dark w-100 d-block btn p-2" href="<?php echo site_url('cuenta-usuario');?>#venta"><i class="far fa-id-badge"></i> MI PERFIL</a>
 						</div>
 						<div class="input-group my-2">
 							<a class="btn-secondary w-100 d-block btn p-2" href="<?php echo wp_logout_url( site_url() );?>"><i class="fas fa-door-open"></i> CERRAR SESIÓN</a>

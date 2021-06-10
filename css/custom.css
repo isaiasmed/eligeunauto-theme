@@ -314,3 +314,11 @@
 .login-button > i.fa-google {
 	background: #d20000 !important;
 }
+#tabs-cuenta.nav-tabs {
+	border-bottom: none !important;
+}
+.page-banner {
+	height: 160px;
+	background-size: cover !important;
+	background-position: center center !important;
+}
