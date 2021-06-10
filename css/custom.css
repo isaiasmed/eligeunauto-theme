@@ -295,3 +295,22 @@
 	font-weight: bold;
 	border: none;
 }
+.modal-login {
+	overflow: hidden;
+	max-height: 475px;
+}
+#login br {
+	line-height: 0;
+	display: none;
+}
+.mo-openid-app-icons{
+	margin-top:15px;
+}
+.mo-openid-app-icons p {
+	color: #b0b0b0 !important;
+	margin-bottom: 5px !important;
+	display: block;
+}
+.login-button > i.fa-google {
+	background: #d20000 !important;
+}

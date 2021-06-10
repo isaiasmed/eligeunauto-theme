@@ -14,5 +14,17 @@
 	});
 	$('#btn-login').on('click',function(){
 		$('#login_modal').modal('show');
+		return false;
+	});
+	$('.lost').on('click',function(){
+		$('#forgot_password').fadeIn('slow');
+		$('#login').fadeOut('fast');
+		$('#email').focus();
+		return false;
+	});
+	$('.cancellost').on('click',function(){
+		$('#forgot_password').fadeOut('slow');
+		$('#login').fadeIn('fast');
+		return false;
 	});
 })(jQuery);

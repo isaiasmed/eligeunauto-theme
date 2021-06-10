@@ -48,7 +48,7 @@
                         </li>-->
                     </ul>
                 </div>
-				<a id="btn-login" class="nav-link text-dark" aria-current="page" href="#"><i class="fas fa-user-circle"></i></a>
+				<a id="btn-login" class="nav-link text-dark" aria-current="page" href="#"><i class="fas fa-user-circle"></i><?php if(is_user_logged_in()):?> <span class="spanuser ml-1"><?php $current_user = wp_get_current_user(); echo $current_user->user_nicename ; ?></span><?php  endif;?></a>
 				<a class="nav-link text-dark" aria-current="page" href="#"><i class="fas fa-search"></i></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             </div>
