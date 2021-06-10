@@ -460,7 +460,7 @@ class acf_field_image_crop extends acf_field_image {
 
 
     function input_admin_enqueue_scripts() {
-        $dir = plugin_dir_url( __FILE__ );
+        $dir = get_template_directory();
 
 
         // // register & include JS
