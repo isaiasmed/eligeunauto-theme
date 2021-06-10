@@ -13,6 +13,6 @@
 		nav:true,
 	});
 	$('#btn-login').on('click',function(){
-		$('#myModal').modal('show');
+		$('#login_modal').modal('show');
 	});
 })(jQuery);

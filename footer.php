@@ -53,6 +53,56 @@
 			</div>
 		</div>
 	</div><!--DEL MAIN FULL-->
+	
+	<div id="login_modal" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog modal-lg modal-dialog-centered " role="document">
+		<div class="modal-content">
+		  <div class="modal-body p-0">
+			<div class="d-flex p-0">
+				<div class="m-0 p-0">
+					<?php $img=get_field('login_image','options'); $image=$img['url'];?>
+					<img src="<?php echo $image;?>">
+				</div>
+				<div class="w-100 p-5">
+					<!-- Tabs navs -->
+					<ul class="nav nav-tabs d-flex login-modal" role="tablist">
+						<li role="presentation" class="flex-fill text-center"><a class="d-block p-2 active" href="#home" aria-controls="home" role="tab" data-toggle="tab">INGRESAR</a></li>
+						<li role="presentation" class="flex-fill text-center"><a class="d-block p-2" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">REGISTRASE</a></li>
+					</ul>
+					  <!-- Tab panes -->
+					<div class="tab-content p-3">
+						<div role="tabpanel" class="tab-pane active" id="home">
+							<form id="login" action="login" method="post">
+								<h1>Site Login</h1>
+								<p class="status"></p>
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3">@</span>
+        </div>
+        <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required name="username">
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+      </div>
+
+								<label for="password">Password</label>
+								<input id="password" type="password" name="password">
+								<a class="lost" href="<?php echo wp_lostpassword_url(); ?>">Lost your password?</a>
+								<input class="submit_button" type="submit" value="Login" name="submit">
+								<a class="close" href="">(close)</a>
+								<?php wp_nonce_field( 'ajax-login-nonce', 'security' ); ?>
+							</form>
+						
+						</div>
+						<div role="tabpanel" class="tab-pane" id="profile">Formulario de Inscripcion</div>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
 	<?php wp_footer();?>
     </body>
 </html>
