@@ -460,7 +460,7 @@ class acf_field_image_crop extends acf_field_image {
 
 
     function input_admin_enqueue_scripts() {
-        $dir = get_template_directory();
+        $dir = get_template_directory_uri(__FILE__)."/includes/acf/inc/";
 
 
         // // register & include JS
@@ -474,9 +474,8 @@ class acf_field_image_crop extends acf_field_image {
 
         // register acf scripts
         //wp_register_script('acf-input-image', "{$dir}../advanced-custom-fields-pro/js/input/image.js");
-        wp_register_script('acf-input-image_crop', "{$dir}js/input.js", array('acf-input', 'imgareaselect'));
-
-        wp_register_style('acf-input-image_crop', "{$dir}css/input.css", array('acf-input'));
+        wp_register_script('acf-input-image_crop', acf_get_external_dir(__FILE__, 'js/input.js'), array('acf-input', 'imgareaselect'));
+        wp_register_style('acf-input-image_crop', acf_get_external_dir(__FILE__, 'css/input.css'), array('acf-input'));
 
         // scripts
         wp_enqueue_script(array(
