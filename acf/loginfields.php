@@ -11,6 +11,7 @@
 				'menu_title'    => 'Login',
 				'menu_slug'     => 'login-settings',
 				'capability'    => 'edit_posts',
+				'icon_url' => 'dashicons-images-alt2',
 				'redirect'      => false
 			));
 		}
