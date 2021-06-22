@@ -54,8 +54,8 @@ add_action( 'tgmpa_register', 'eligeunauto_register_required_plugins' );
 function eligeunauto_register_required_plugins() {
 	$plugins = array(
 			array(
-           'name'      => 'Visual Composer Website Builder',
-           'slug'      => 'visualcomposer',
+           'name'      => 'Elementor Website Builder',
+           'slug'      => 'elementor',
            'required'  => false,
         ),
 		array(
