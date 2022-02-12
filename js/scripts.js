@@ -27,4 +27,8 @@
 		$('#login').fadeIn('fast');
 		return false;
 	});
+	
+	$(document).on('change','#acf-field_60c07fa5bb1fa',function(){
+		console.log($(this).val());
+	});
 })(jQuery);

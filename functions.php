@@ -204,6 +204,19 @@ function cptui_register_my_cpts_autos() {
 	register_post_type( "autos", $args );
 }
 add_action( 'init', 'cptui_register_my_cpts_autos' );
+//Añadimos admin js
+add_action( 'admin_print_scripts-post-new.php', 'portfolio_admin_script', 11 );
+add_action( 'admin_print_scripts-post.php', 'portfolio_admin_script', 11 );
+
+function portfolio_admin_script() {
+    global $post_type;
+    if( 'autos' == $post_type )
+    wp_enqueue_script( 'autos-admin-script', get_stylesheet_directory_uri() . '/js/admin.js' );
+}
+
+
+
+
 
 //Crear paginas de usuario
 add_action( 'after_switch_theme', 'create_page_on_theme_activation' );
