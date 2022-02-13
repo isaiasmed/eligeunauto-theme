@@ -57,7 +57,7 @@
 				<h3 class="rayita w-100 text-center"><span class="text-primary">¿POR QUÉ <span class="text-secondary">ELEGIRNOS?</span></h3>
 				<div class="col-4">
 					<div class="card-index">
-						<img src="assets/img/icono1.png"><br>
+						<img src="<?php echo get_stylesheet_directory_uri();?>/assets/img/icono1.png"><br>
 						<div class="card-title">
 							CERTIFICACIÓN y GARANTÍA
 						</div>
