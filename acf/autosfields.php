@@ -9,7 +9,7 @@ acf_add_local_field_group(array(
 			'key' => 'field_60c07fa5bb1fa',
 			'label' => 'Marca',
 			'name' => 'marca',
-			'type' => 'select',
+			'type' => 'taxonomy',
 			'instructions' => '',
 			'required' => 1,
 			'conditional_logic' => 0,
@@ -18,6 +18,14 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
+			'taxonomy' => 'marcas',
+			'field_type' => 'select',
+			'allow_null' => 0,
+			'add_term' => 1,
+			'save_terms' => 1,
+			'load_terms' => 1,
+			'return_format' => 'object',
+			'multiple' => 0,
 			'choices' => array(
 			),
 			'default_value' => false,
@@ -80,7 +88,7 @@ acf_add_local_field_group(array(
 			'name' => 'descripcion',
 			'type' => 'button_group',
 			'instructions' => '',
-			'required' => 1,
+			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
@@ -90,7 +98,7 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				0 => 'Selecciona los datos',
 			),
-			'allow_null' => 0,
+			'allow_null' => 1,
 			'default_value' => '0',
 			'layout' => 'horizontal',
 			'return_format' => 'value',
@@ -247,7 +255,20 @@ acf_add_local_field_group(array(
 	'style' => 'default',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
-	'hide_on_screen' => '',
+	'hide_on_screen' => array(
+		0 => 'the_content',
+		1 => 'excerpt',
+		2 => 'discussion',
+		3 => 'comments',
+		4 => 'revisions',
+		5 => 'author',
+		6 => 'format',
+		7 => 'page_attributes',
+		8 => 'featured_image',
+		9 => 'categories',
+		10 => 'tags',
+		11 => 'send-trackbacks',
+	),
 	'active' => true,
 	'description' => '',
 ));
@@ -257,7 +278,8 @@ endif;
 //Mandamos info al select de marcas
 
 function acf_load_marca_field_choices( $field ) {
-    $field['choices'] = array();    
+	global $post;	
+	$field['choices'] = array();    
     global $wpdb;
 	$tablename=$wpdb->prefix.'modelos';
 	$query="select Marca,count(Anio) FROM {$tablename} group by Marca order by Marca asc;";
@@ -265,13 +287,10 @@ function acf_load_marca_field_choices( $field ) {
 	$marcas=array();
 	foreach($res as $ma){
 		$marcas[]=$ma['Marca'];
-	}
-    
-    
+	}    
     // remove any unwanted white space
     $choices = array_map('trim', $marcas);
 
-    
     // loop through array and add to field 'choices'
     if( is_array($choices) ) {
         
@@ -283,20 +302,107 @@ function acf_load_marca_field_choices( $field ) {
         
     }
     
-
     // return the field
     return $field;
     
 }
-
 add_filter('acf/load_field/name=marca', 'acf_load_marca_field_choices');
+
+//Prellenamos el campo año si trae valor ya guardado de marca
+function acf_load_anio_field_choices( $field ) {
+	global $post;
+	$marcao=get_field('marca',$post->ID);
+	if($marcao){
+		$field['choices'] = array();
+		$marcaname=get_term($marcao,'marcas',ARRAY_A);	
+		global $wpdb;
+		$tablename=$wpdb->prefix.'modelos';
+		$query="select Anio FROM {$tablename} where Marca = '".$marcaname['name']."' group by anio order by anio desc;";
+		$res=$wpdb->get_results($query,ARRAY_A);
+		$marcas=array();
+		foreach($res as $ma){
+			$marcas[]=$ma['Anio'];
+		}    
+		$choices = array_map('trim', $marcas);
+		if( is_array($choices) ) {
+			foreach( $choices as $choice ) {
+				$field['choices'][ $choice ] = $choice;
+			}
+		}
+    }else{
+		$field['choices'][ '' ] = 'Selecciona Año';
+	}
+    return $field;
+}
+add_filter('acf/load_field/name=anio', 'acf_load_anio_field_choices');
+
+//Prellenamos el campo año si trae valor ya guardado de marca
+function acf_load_modelo_field_choices( $field ) {
+	global $post;
+	$marcao=get_field('marca',$post->ID);
+	$anioo=get_field('anio',$post->ID);
+	if($marcao && $anioo){
+		$field['choices'] = array();
+		$marcaname=get_term($marcao,'marcas',ARRAY_A);	
+		global $wpdb;
+		$tablename=$wpdb->prefix.'modelos';
+		$query="select Modelo FROM {$tablename} where Marca = '".$marcaname['name']."' and Anio=".$anioo." group by Modelo order by Modelo desc;";
+		$res=$wpdb->get_results($query,ARRAY_A);
+		$marcas=array();
+		foreach($res as $ma){
+			$marcas[]=$ma['Modelo'];
+		}    
+		$choices = array_map('trim', $marcas);
+		if( is_array($choices) ) {
+			foreach( $choices as $choice ) {
+				$field['choices'][ $choice ] = $choice;
+			}
+		}
+    }else{
+		$field['choices'][ '' ] = 'Selecciona Modelo';
+	}
+    return $field;
+}
+add_filter('acf/load_field/name=modelo', 'acf_load_modelo_field_choices');
+
+//Prellenamos el campo año si trae valor ya guardado de marca
+function acf_load_descripcion_field_choices( $field ) {
+	global $post;
+	$marcao=get_field('marca',$post->ID);
+	$anioo=get_field('anio',$post->ID);
+	$modeloo=get_field('modelo',$post->ID);
+	if($marcao && $anioo && $modeloo){
+		$field['choices'] = array();
+		$marcaname=get_term($marcao,'marcas',ARRAY_A);	
+		global $wpdb;
+		$tablename=$wpdb->prefix.'modelos';
+		$query="select Equipamiento FROM {$tablename} where Marca = '".$marcaname['name']."' and Anio=".$anioo." and Modelo='".$modeloo."' group by Equipamiento order by Equipamiento desc;";
+		$res=$wpdb->get_results($query,ARRAY_A);
+		$marcas=array();
+		foreach($res as $ma){
+			$marcas[]=$ma['Equipamiento'];
+		}    
+		$choices = array_map('trim', $marcas);
+		if( is_array($choices) ) {
+			foreach( $choices as $choice ) {
+				$field['choices'][ $choice ] = $choice;
+			}
+		}
+    }else{
+		//$field['choices'][ '' ] = 'Selecciona Modelo';
+	}
+    return $field;
+}
+add_filter('acf/load_field/name=descripcion', 'acf_load_descripcion_field_choices');
+
 
 //Agregamos buscador del select
 add_action('wp_ajax_getanios','getanios');
 function getanios(){
 	global $wpdb;
+	$marca=get_term($_POST['marca'],'marcas',ARRAY_A);	
 	$tablename=$wpdb->prefix.'modelos';
-	$query="SELECT anio FROM {$tablename} where marca='".$_POST['marca']."' GROUP BY anio order by anio desc;";
+	$query="SELECT anio FROM {$tablename} where marca='".$marca['name']."' GROUP BY anio order by anio desc;";
 	$res=$wpdb->get_results($query,ARRAY_A);
 	$anios=array();
 	foreach($res as $ma){
@@ -309,7 +415,8 @@ add_action('wp_ajax_getmodelos','getmodelos');
 function getmodelos(){
 	global $wpdb;
 	$tablename=$wpdb->prefix.'modelos';
-	$query="SELECT modelo FROM {$tablename} where marca='".$_POST['marca']."' and anio=".$_POST['anio']." GROUP BY modelo order by modelo asc;";
+	$marca=get_term($_POST['marca'],'marcas',ARRAY_A);	
+	$query="SELECT modelo FROM {$tablename} where marca='".$marca['name']."' and anio=".$_POST['anio']." GROUP BY modelo order by modelo asc;";
 	$res=$wpdb->get_results($query,ARRAY_A);
 	$modelos=array();
 	foreach($res as $ma){
@@ -323,8 +430,9 @@ function getmodelos(){
 add_action('wp_ajax_getdescr','getdescr');
 function getdescr(){
 	global $wpdb;
+	$marca=get_term($_POST['marca'],'marcas',ARRAY_A);	
 	$tablename=$wpdb->prefix.'modelos';
-	$query="SELECT equipamiento FROM {$tablename} where marca='".$_POST['marca']."' and anio=".$_POST['anio']." and modelo='".$_POST['modelo']."' order by equipamiento	asc;";
+	$query="SELECT equipamiento FROM {$tablename} where marca='".$marca['name']."' and anio=".$_POST['anio']." and modelo='".$_POST['modelo']."' order by equipamiento	asc;";
 	$res=$wpdb->get_results($query,ARRAY_A);
 	$equipamiento=array();
 	foreach($res as $ma){
@@ -335,4 +443,57 @@ function getdescr(){
 }
 
 
+function cptui_register_my_taxes_marcas() {
+
+	/**
+	 * Taxonomy: Marcas.
+	 */
+
+	$labels = [
+		"name" => __( "Marcas", "custom-post-type-ui" ),
+		"singular_name" => __( "marca", "custom-post-type-ui" ),
+		"menu_name" => __( "Marcas", "custom-post-type-ui" ),
+		"all_items" => __( "Todos los Marcas", "custom-post-type-ui" ),
+		"edit_item" => __( "Editar marca", "custom-post-type-ui" ),
+		"view_item" => __( "Ver marca", "custom-post-type-ui" ),
+		"update_item" => __( "Actualizar el nombre de marca", "custom-post-type-ui" ),
+		"add_new_item" => __( "Añadir nuevo marca", "custom-post-type-ui" ),
+		"new_item_name" => __( "Nombre del nuevo marca", "custom-post-type-ui" ),
+		"parent_item" => __( "marca superior", "custom-post-type-ui" ),
+		"parent_item_colon" => __( "marca superior:", "custom-post-type-ui" ),
+		"search_items" => __( "Buscar Marcas", "custom-post-type-ui" ),
+		"popular_items" => __( "Marcas populares", "custom-post-type-ui" ),
+		"separate_items_with_commas" => __( "Separar Marcas con comas", "custom-post-type-ui" ),
+		"add_or_remove_items" => __( "Añadir o eliminar Marcas", "custom-post-type-ui" ),
+		"choose_from_most_used" => __( "Escoger entre los Marcas más usandos", "custom-post-type-ui" ),
+		"not_found" => __( "No se ha encontrado Marcas", "custom-post-type-ui" ),
+		"no_terms" => __( "Ningún Marcas", "custom-post-type-ui" ),
+		"items_list_navigation" => __( "Navegación de la lista de Marcas", "custom-post-type-ui" ),
+		"items_list" => __( "Lista de Marcas", "custom-post-type-ui" ),
+		"back_to_items" => __( "Volver a Marcas", "custom-post-type-ui" ),
+	];
+
+	
+	$args = [
+		"label" => __( "Marcas", "custom-post-type-ui" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => false,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => 'marcas', 'with_front' => true, ],
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"show_tagcloud" => false,
+		"rest_base" => "marcas",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"show_in_quick_edit" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "marcas", [ "autos" ], $args );
+}
+add_action( 'init', 'cptui_register_my_taxes_marcas' );
 

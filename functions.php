@@ -20,7 +20,13 @@ remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 
-show_admin_bar( false );	
+//show_admin_bar( false );	
+
+
+add_image_size( 'medium_large', '768', '0', false );
+add_image_size( '1536x1536', '1536', '1536', false );
+add_image_size( '2048x2048', '2048', '2048', false );
+add_image_size( 'autos-small', '345', '235', true ); 
 
 /********************Añadir estilos*******************/
 add_theme_support('title-tag');
