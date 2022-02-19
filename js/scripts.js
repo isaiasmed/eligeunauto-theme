@@ -4,14 +4,16 @@
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-bare/blob/master/LICENSE)
 */
 (function($) {
-    //$( "div" ).show();
-
-	$('.indexslide').owlCarousel({
-		items:1,
-		loop:true,
-		margin:0,
-		nav:true,
-	});
+    
+	if($('.indexslide').count>0){
+		//Slider home
+		$('.indexslide').owlCarousel({
+			items:1,
+			loop:true,
+			margin:0,
+			nav:true,
+		});
+	}
 	$('#btn-login').on('click',function(){
 		$('#login_modal').modal('show');
 		return false;
@@ -27,6 +29,9 @@
 		$('#login').fadeIn('fast');
 		return false;
 	});
+	
+	 $('.xzoom, .xzoom-gallery').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});
+    
 	
 	$(document).on('change','#acf-field_60c07fa5bb1fa',function(){
 		console.log($(this).val());

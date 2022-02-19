@@ -26,7 +26,7 @@ body{
 	border-bottom: 2px solid red;
 }
 .container, .container-sm, .container-md, .container-lg, .container-xl {
-	max-width: 1260px;
+	max-width: 1080px;
 }
 .btn {
 	border-radius: 0px;
@@ -261,9 +261,6 @@ body{
 	padding: 0px !important;
 }
 
-
-
-
 .banner-page {
 	height: 160px;
 	position: relative;
@@ -330,4 +327,27 @@ body{
 	height: 160px;
 	background-size: cover !important;
 	background-position: center center !important;
+}
+
+.xzoom-source img, .xzoom-preview img, .xzoom-lens img {
+	display: block;
+	max-width: none;
+	max-height: none;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+#main_image {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto 15px;
+}
+.line-auto {
+	background: #f7f9fb;
+	padding: 10px;
+}
+.title.line-auto{
+	border-left: 3px solid #f00;
 }
