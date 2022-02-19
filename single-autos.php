@@ -13,11 +13,11 @@
 							<img class="xzoom w-100" id="main_image" src="<?php echo $item['sizes']['autos-medium']?>" xoriginal="<?php echo $item['url']?>">
 						</div>
 						<a href="<?php echo $item['url'];?>">
-						  <img class="xzoom-gallery" width="80" src="<?php echo $item['sizes']['thumbnail']?>" xpreview="<?php echo $item['sizes']['autos-medium']?>" xoriginal="<?php echo $item['url']?>">
+						  <img class="xzoom-gallery" width="23%" src="<?php echo $item['sizes']['thumbnail']?>" xpreview="<?php echo $item['sizes']['autos-medium']?>">
 						</a><?php
 					}else{?>
 						<a href="<?php echo $item['url'];?>">
-						  <img class="xzoom-gallery" width="80" src="<?php echo $item['sizes']['thumbnail']?>" xpreview="<?php echo $item['sizes']['autos-medium']?>" xoriginal="<?php echo $item['url']?>">
+						  <img class="xzoom-gallery" width="23%" src="<?php echo $item['sizes']['thumbnail']?>" xpreview="<?php echo $item['sizes']['autos-medium']?>">
 						</a><?php					
 					}
 					$x++;
@@ -26,8 +26,7 @@
 		</div>
 		<div class="col-5 py-5 px-5">
 			<div class="w-100 widget-auto">
-				<div class="title line-auto row"><?php the_title();?></div>
-				<div class="line-auto row"><?php the_title();?></div>
+				<div class="title line-auto row"><?php the_title();?><br><span class="w-100 precio">$ <?php echo number_format(get_field('precio'),2);?></span><br></div>
 				<div class="line-auto row">Disponible</div>
 				<div class="line-auto row">
 					<div class="col-5">
